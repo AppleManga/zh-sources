@@ -9,7 +9,7 @@ use aidoku::{
 		net::{HttpMethod, Request},
 		String, Vec,
 	},
-	Chapter, Filter, FilterType, Listing, Manga, MangaContentRating, MangaPageResult, MangaStatus, MangaViewer, Page
+	Chapter, Filter, FilterType, Manga, MangaContentRating, MangaPageResult, MangaStatus, MangaViewer, Page
 };
 use alloc::string::ToString;
 
@@ -18,7 +18,7 @@ const USER_AGENT: &str = "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6_1 like Mac OS 
 
 const FILTER_CATALOG: [&str; 6] = ["all", "韩漫", "日漫", "3D漫画", "真人", "短篇"];
 const FILTER_END: [&str; 3] = ["all", "serialized", "completed"];
-const FILTER_ORDER: [&str; 2] = ["time", "hits"];
+const FILTER_ORDER: [&str; 2] = ["hits", "time"];
 
 #[get_manga_list]
 fn get_manga_list(filters: Vec<Filter>, page: i32) -> Result<MangaPageResult> {
@@ -91,11 +91,6 @@ fn get_manga_list(filters: Vec<Filter>, page: i32) -> Result<MangaPageResult> {
 		manga: mangas,
 		has_more,
 	})
-}
-
-#[get_manga_listing]
-fn get_manga_listing(_: Listing, _: i32) -> Result<MangaPageResult> {
-	todo!()
 }
 
 #[get_manga_details]

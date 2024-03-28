@@ -15,7 +15,7 @@
 	{
 		"type": "select",
 		"name": "排序",
-		"options": ["时间", "点击"]
+		"options": ["人气", "时间"]
 	}
   ]
   
