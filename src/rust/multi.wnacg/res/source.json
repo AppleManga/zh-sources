@@ -1,0 +1,69 @@
+{
+	"info": {
+		"id": "multi.wnacg",
+		"lang": "multi",
+		"name": "紳士漫畫",
+		"version": 1,
+		"url": "https://www.wnacg.com",
+		"nsfw": 2
+	},
+	"languages": [
+
+	],
+	"listings": [
+		{
+			"name": "同人誌(全部)"
+		},
+		{
+			"name": "同人誌-漢化"
+		},
+		{
+			"name": "同人誌-日語"
+		},
+		{
+			"name": "同人誌-English"
+		},
+		{
+			"name": "同人誌-CG畫集"
+		},
+		{
+			"name": "同人誌-3D漫畫"
+		},
+		{
+			"name": "同人誌-Cosplay"
+		},
+		{
+			"name": "單行本(全部)"
+		},
+		{
+			"name": "單行本-漢化"
+		},
+		{
+			"name": "單行本-日語"
+		},
+		{
+			"name": "單行本-English"
+		},
+		{
+			"name": "雜誌&短篇(全部)"
+		},
+		{
+			"name": "雜誌&短篇-漢化"
+		},
+		{
+			"name": "雜誌&短篇-日語"
+		},
+		{
+			"name": "雜誌&短篇-English"
+		},
+		{
+			"name": "韓漫(全部)"
+		},
+		{
+			"name": "韓漫-漢化"
+		},
+		{
+			"name": "韓漫-其他"
+		}
+	]
+}
