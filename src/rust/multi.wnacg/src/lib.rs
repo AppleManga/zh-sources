@@ -3,9 +3,10 @@ extern crate alloc;
 
 use aidoku::{
 	error::Result,
-	helpers::{uri::encode_uri},
+	helpers::{substring::Substring, uri::encode_uri},
 	prelude::*,
 	std::{
+		json,
 		defaults::defaults_get,
 		net::{HttpMethod, Request},
 		String, Vec,
@@ -208,7 +209,6 @@ fn get_manga_details(id: String) -> Result<Manga> {
 		.collect::<Vec<String>>()
 		.join(", ");
 	let artist = String::new();
-	// aidoku::prelude::println!("artist: {}", artist);
 	let description = html
 		.select(".asTBcell.uwconn>p")
 		.text()
@@ -268,23 +268,25 @@ fn get_chapter_list(id: String) -> Result<Vec<Chapter>> {
 
 #[get_page_list]
 fn get_page_list(manga_id: String, _: String) -> Result<Vec<Page>> {
-	let url = format!("{}/photos-gallery-aid-{}.html", get_url(), manga_id.clone());
+	let url = format!("{}/photos-item-aid-{}.html", get_url(), manga_id.clone());
 	let text = Request::new(url.clone(), HttpMethod::Get).string()?;
-	let urls = text
-		.split("\\\"")
-		.filter(|a| a.starts_with("//"))
-		.map(|a| a.to_string());
+	let mut list_text = text
+		.substring_after("\"page_url\":")
+		.unwrap()
+		.substring_before(",]")
+		.unwrap()
+		.to_string();
+	list_text = format!("{}]", list_text);
+	let list = json::parse(list_text)?.as_array()?;
 	let mut pages: Vec<Page> = Vec::new();
-
-	for (index, item) in urls.enumerate() {
+	for (index, item) in list.enumerate() {
 		let index = index as i32;
-		let url = format!("https:{}", item);
+		let url = item.as_string()?.read();
 		pages.push(Page {
 			index,
 			url,
 			..Default::default()
 		})
 	}
-
 	Ok(pages)
 }
