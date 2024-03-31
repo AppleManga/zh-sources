@@ -204,8 +204,9 @@ fn get_manga_details(id: String) -> Result<Manga> {
 		.trim()
 		.to_string()
 		.replace("分類：", "")
+		.replace("&", "／")
 		.split("／")
-		.map(|a| a.to_string())
+		.map(|a| a.trim().to_string())
 		.collect::<Vec<String>>()
 		.join(", ");
 	let artist = String::new();
