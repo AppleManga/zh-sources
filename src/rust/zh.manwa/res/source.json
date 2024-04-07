@@ -1,0 +1,16 @@
+{
+	"info": {
+		"id": "zh.zh-manwa",
+		"lang": "zh",
+		"name": "漫蛙漫画",
+		"version": 1,
+		"url": "https://manwa.me",
+		"nsfw": 1
+	},
+	"languages": [
+
+	],
+	"listings": [
+
+	]
+}
