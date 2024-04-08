@@ -18,6 +18,7 @@ This repository hosts the public sources that are installable directly through t
 - [ ] 酷看漫画 `https://www.kukanmanhua.com`
 - [ ] 催漫画 `https://www.cuimanhua.com`
 - [ ] YYSD 漫画 `https://www.yydsmh.com`
+- [ ] 天堂漫画 `https://www.tiantangmanhua.com`
 
 ## Contributing
 Contributions are welcome!
