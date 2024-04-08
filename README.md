@@ -20,6 +20,8 @@ This repository hosts the public sources that are installable directly through t
 - [ ] 催漫画 `https://www.cuimanhua.com`
 - [ ] YYSD 漫画 `https://www.yydsmh.com`
 - [ ] 天堂漫画 `https://www.tiantangmanhua.com`
+- [ ] 超好看 `https://tmsmh.com`
+- [ ] 优乐漫画 `https://www.beston-test.com`
 
 ## Contributing
 Contributions are welcome!
