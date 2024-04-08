@@ -11,6 +11,7 @@ This repository hosts the public sources that are installable directly through t
 - [x] 漫画吧 `https://www.gmh8.com`
 - [x] cc漫画网 `https://www.qiruiyaoye.cn`
 - [x] 紳士漫畫 `https://www.wnacg.com`
+- [x] 看漫画 `https://www.kanman.com`
 
 ## To-Do List
 
@@ -19,7 +20,6 @@ This repository hosts the public sources that are installable directly through t
 - [ ] 催漫画 `https://www.cuimanhua.com`
 - [ ] YYSD 漫画 `https://www.yydsmh.com`
 - [ ] 天堂漫画 `https://www.tiantangmanhua.com`
-- [ ] 看漫画 `https://www.kanman.com`
 
 ## Contributing
 Contributions are welcome!
