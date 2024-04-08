@@ -4,6 +4,21 @@ This repository hosts the public sources that are installable directly through t
 ## Usage
 [Add this source list](https://aidoku.app/add-source-list/?url=https://raw.githubusercontent.com/WhisperKit/zh-sources/gh-pages/) to the Aidoku app.
 
+## Source List
+
+- [x] 36漫画 `https://www.qimiaomanhua.com`
+- [x] 禁漫岛 `https://52jmd.com`
+- [x] 漫画吧 `https://www.gmh8.com`
+- [x] cc漫画网 `https://www.qiruiyaoye.cn`
+- [x] 紳士漫畫 `https://www.wnacg.com`
+
+## To-Do List
+
+- [ ] 漫蛙漫画 `https://manwa.me`
+- [ ] 酷看漫画 `https://www.kukanmanhua.com`
+- [ ] 催漫画 `https://www.cuimanhua.com`
+- [ ] YYSD 漫画 `https://www.yydsmh.com`
+
 ## Contributing
 Contributions are welcome!
 
