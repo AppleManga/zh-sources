@@ -12,16 +12,17 @@ This repository hosts the public sources that are installable directly through t
 - [x] cc漫画网 `https://www.qiruiyaoye.cn`
 - [x] 紳士漫畫 `https://www.wnacg.com`
 - [x] 看漫画 `https://www.kanman.com`
+- [x] 酷看漫画 `https://www.kukanmanhua.com`
 
 ## To-Do List
 
 - [ ] 漫蛙漫画 `https://manwa.me`
-- [ ] 酷看漫画 `https://www.kukanmanhua.com`
 - [ ] 催漫画 `https://www.cuimanhua.com`
 - [ ] YYSD 漫画 `https://www.yydsmh.com`
 - [ ] 天堂漫画 `https://www.tiantangmanhua.com`
 - [ ] 超好看 `https://tmsmh.com`
 - [ ] 优乐漫画 `https://www.beston-test.com`
+- [ ] 拷貝漫畫 `https://www.mangacopy.com`
 
 ## Contributing
 Contributions are welcome!
