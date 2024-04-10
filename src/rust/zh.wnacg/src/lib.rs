@@ -225,7 +225,7 @@ fn get_manga_details(id: String) -> Result<Manga> {
 		.collect::<Vec<String>>();
 	let status = MangaStatus::Unknown;
 	let nsfw = MangaContentRating::Nsfw;
-	let viewer = MangaViewer::Scroll;
+	let viewer = MangaViewer::Vertical;
 
 	Ok(Manga {
 		id,
