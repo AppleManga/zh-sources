@@ -23,6 +23,8 @@ This repository hosts the public sources that are installable directly through t
 - [ ] 超好看 `https://tmsmh.com`
 - [ ] 优乐漫画 `https://www.beston-test.com`
 - [ ] 拷貝漫畫 `https://www.mangacopy.com`
+- [ ] 猪猪漫画 `https://www.zhuzhumh.com`
+- [ ] 喜漫漫画 `https://www.favcomic.com`
 
 ## Contributing
 Contributions are welcome!
