@@ -13,6 +13,7 @@ This repository hosts the public sources that are installable directly through t
 - [x] 紳士漫畫 `https://www.wnacg.com`
 - [x] 看漫画 `https://www.kanman.com`
 - [x] 酷看漫画 `https://www.kukanmanhua.com`
+- [x] 喜漫漫画 `https://www.favcomic.com` ( 支持账号登录 )
 
 ## To-Do List
 
@@ -24,7 +25,6 @@ This repository hosts the public sources that are installable directly through t
 - [ ] 优乐漫画 `https://www.beston-test.com`
 - [ ] 拷貝漫畫 `https://www.mangacopy.com`
 - [ ] 猪猪漫画 `https://www.zhuzhumh.com`
-- [ ] 喜漫漫画 `https://www.favcomic.com`
 
 ## Contributing
 Contributions are welcome!
