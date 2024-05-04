@@ -11,7 +11,7 @@ const FILTER_TYPES: [&str; 4] = ["boy", "girl", "r18", "picture"];
 const FILTER_ORIGIN: [&str; 5] = ["0", "2", "3", "1", "4"];
 const FILTER_FINISHED: [&str; 3] = ["0", "1", "2"];
 const FILTER_FREE: [&str; 3] = ["0", "1", "2"];
-const FILTER_SORT: [&str; 2] = ["2", "1"];
+const FILTER_SORT: [&str; 2] = ["1", "2"];
 
 #[get_manga_list]
 fn get_manga_list(filters: Vec<Filter>, page: i32) -> Result<MangaPageResult> {
@@ -52,9 +52,14 @@ fn get_manga_list(filters: Vec<Filter>, page: i32) -> Result<MangaPageResult> {
 		}
 	}
 
-	let url = helper::gen_cate_url(types, encode_uri(query.clone()), origin, finished, free, sort, page.to_string());
+	let url = helper::gen_explore_url(types.clone(), encode_uri(query.clone()), origin, finished, free, sort, page.to_string());
 
 	let html = helper::get_html(url)?;
+
+	// 自动签到
+	if query.is_empty() && types == "boy" && page == 1 {
+		helper::check_in()
+	}
 
 	let has_more = query.is_empty();
 
@@ -129,8 +134,28 @@ fn get_manga_details(id: String) -> Result<Manga> {
 			MangaStatus::Unknown
 		}
 	};
-	let nsfw = MangaContentRating::Safe;
-	let viewer = MangaViewer::Scroll;
+
+	let tag_url = html
+		.select(".tag_box > a:nth-child(1)")
+		.attr("href").read();
+	let nsfw = if tag_url.clone().contains("/r18") {
+		MangaContentRating::Nsfw
+	} else if tag_url.clone().contains("/picture") {
+		MangaContentRating::Suggestive
+	} else {
+		MangaContentRating::Safe
+	};
+
+	let toon_icon = html.select(".comic_cover_box > div > div.toon_box > img")
+		.attr("src")
+		.read();
+	let viewer = if toon_icon.contains("vtoon_icon") {
+		println!("Scroll");
+		MangaViewer::Scroll
+	} else {
+		println!("Rtl");
+		MangaViewer::Rtl
+	};
 
 	Ok(Manga {
 		id,
@@ -167,7 +192,7 @@ fn get_chapter_list(manga_id: String) -> Result<Vec<Chapter>> {
 		let title = item.select(".title").text().read().trim().to_string();
 		let mut scanlator = item.select("span:nth-child(2)").text().read().trim().to_string().replace("￥", "").replace("&nbsp;", "");
 		if scanlator == "会员专享" {
-			scanlator = "会员免费".to_string();
+			scanlator = "登录免费".to_string();
 		} else {
 			scanlator = format!("￥ {}", scanlator );
 		}

@@ -27,6 +27,12 @@
 				"key": "login_time",
 				"placeholder": "登录时间",
 				"default": ""
+			},
+			{
+				"type": "switch",
+				"key": "auto_check_in",
+				"title": "自动签到",
+				"default": false
 			}
 		]
 	}

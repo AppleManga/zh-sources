@@ -25,7 +25,7 @@
 	{
 		"type": "select",
 		"name": "排序",
-		"options": ["更新", "人气"]
+		"options": ["人气", "更新"]
 	}
 
 ]

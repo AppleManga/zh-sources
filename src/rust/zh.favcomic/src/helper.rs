@@ -14,6 +14,7 @@ use alloc::string::ToString;
 use aidoku::std::html::Node;
 
 const WWW_URL: &str = "https://www.favcomic.com";
+const API_URL: &str = "https://api.favcomic.com";
 
 pub fn gen_request(url: String, method: HttpMethod) -> Request {
     let username = defaults_get("username").and_then(|v| v.as_string().map(|v| v.read())).unwrap_or_default();
@@ -46,10 +47,6 @@ pub fn login() -> Result<String, AidokuError> {
     }
     let body = format!("loginName={}&password={}", username, password);
     let request = request.body(body.as_bytes());
-    request.send();
-    if request.status_code() != 200 {
-        return Ok("".to_string())
-    }
     let json = request.json()?;
     let data = json.as_object()?;
     // 判断是否登录失败
@@ -75,11 +72,11 @@ pub fn gen_time() -> String {
 
 pub fn get_html(url: String) -> Result<Node, AidokuError> {
     let request = gen_request(url, HttpMethod::Get);
-    request.send();
     request.html()
+
 }
 
-pub fn gen_cate_url(cate_id: String, keyword: String, origin: String, finished: String, free: String, sort: String, page: String) -> String {
+pub fn gen_explore_url(cate_id: String, keyword: String, origin: String, finished: String, free: String, sort: String, page: String) -> String {
     format!("{}/{}?keyword={}&origin={}&finished={}&free={}&tag=0&sort={}&page={}",
             WWW_URL,
             cate_id,
@@ -104,4 +101,25 @@ pub fn gen_chapter_url(id: String) -> String {
             WWW_URL,
             id,
     )
+}
+
+pub fn gen_checkin_url() -> String {
+    format!("{}/console/app/user/signin",
+            API_URL
+    )
+}
+
+pub fn check_in() {
+    let not_auto_check_in = !defaults_get("auto_check_in")
+        .and_then(|value| value.as_bool())
+        .unwrap_or(false);
+    if not_auto_check_in {
+        return;
+    }
+    let token = defaults_get("token").and_then(|v| v.as_string().map(|v| v.read())).unwrap_or_default();
+    let request = Request::new(gen_checkin_url(), HttpMethod::Post)
+        .header("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
+        .header("Token", token.as_str());
+    let body = "timeZone=Asia/Shanghai";
+    request.body(body).send();
 }
