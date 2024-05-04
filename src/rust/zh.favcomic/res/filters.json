@@ -1,0 +1,31 @@
+[
+	{
+		"type": "title"
+	},
+	{
+		"type": "select",
+		"name": "类型",
+		"options": ["少年漫画", "少女漫画", "成人漫画", "性感图库"]
+	},
+	{
+		"type": "select",
+		"name": "地区",
+		"options": ["全部", "日本", "韩国", "大陆及港台", "其他"]
+	},
+	{
+		"type": "select",
+		"name": "进度",
+		"options": ["全部", "连载", "完结"]
+	},
+	{
+		"type": "select",
+		"name": "付费",
+		"options": ["全部", "免费", "付费"]
+	},
+	{
+		"type": "select",
+		"name": "排序",
+		"options": ["更新", "人气"]
+	}
+
+]

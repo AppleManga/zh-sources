@@ -1,0 +1,33 @@
+[
+	{
+		"type": "group",
+		"title": "设置",
+		"footer": "只需要填写【账号】和【密码】，【令牌】和【登录时间】会在自动登录后生成",
+		"items": [
+			{
+				"type": "text",
+				"key": "username",
+				"placeholder": "账号",
+				"default": "njwigoiqhs@elatter.com"
+			},
+			{
+				"type": "text",
+				"key": "password",
+				"placeholder": "密码",
+				"default": "password"
+			},
+			{
+				"type": "text",
+				"key": "token",
+				"placeholder": "令牌",
+				"default": ""
+			},
+			{
+				"type": "text",
+				"key": "login_time",
+				"placeholder": "登录时间",
+				"default": ""
+			}
+		]
+	}
+]

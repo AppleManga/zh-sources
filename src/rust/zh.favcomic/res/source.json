@@ -1,0 +1,16 @@
+{
+	"info": {
+		"id": "zh.favcomic",
+		"lang": "zh",
+		"name": "喜漫漫画",
+		"version": 1,
+		"url": "https://www.favcomic.com",
+		"nsfw": 1
+	},
+	"languages": [
+
+	],
+	"listings": [
+
+	]
+}
