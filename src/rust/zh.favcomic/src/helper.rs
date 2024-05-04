@@ -12,6 +12,7 @@ use aidoku::{
 };
 use alloc::string::ToString;
 use aidoku::std::html::Node;
+use aidoku::helpers::uri::encode_uri;
 
 const WWW_URL: &str = "https://www.favcomic.com";
 const API_URL: &str = "https://api.favcomic.com";
@@ -76,16 +77,23 @@ pub fn get_html(url: String) -> Result<Node, AidokuError> {
 
 }
 
-pub fn gen_explore_url(cate_id: String, keyword: String, origin: String, finished: String, free: String, sort: String, page: String) -> String {
-    format!("{}/{}?keyword={}&origin={}&finished={}&free={}&tag=0&sort={}&page={}",
+pub fn gen_explore_url(cate_id: String, origin: String, finished: String, free: String, sort: String, page: i32) -> String {
+    format!("{}/{}?keyword=&origin={}&finished={}&free={}&tag=0&sort={}&page={}",
             WWW_URL,
             cate_id,
-            keyword,
             origin,
             finished,
             free,
             sort,
-            page
+            page.to_string()
+    )
+}
+
+pub fn gen_search_url(keyword: String, page: i32) -> String {
+    format!("{}/search?keyword={}&page={}",
+            WWW_URL,
+            encode_uri(keyword),
+            page.to_string()
     )
 }
 

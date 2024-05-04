@@ -3,7 +3,6 @@ extern crate alloc;
 
 use aidoku::{error::Result, prelude::*, std::{String, Vec}, Chapter, Filter, FilterType, Manga, MangaPageResult, Page, MangaStatus, MangaContentRating, MangaViewer};
 use alloc::string::ToString;
-use aidoku::helpers::uri::encode_uri;
 
 mod helper;
 
@@ -52,7 +51,11 @@ fn get_manga_list(filters: Vec<Filter>, page: i32) -> Result<MangaPageResult> {
 		}
 	}
 
-	let url = helper::gen_explore_url(types.clone(), encode_uri(query.clone()), origin, finished, free, sort, page.to_string());
+	let url = if query.is_empty() {
+		helper::gen_explore_url(types.clone(), origin, finished, free, sort, page)
+	} else {
+		helper::gen_search_url(query.clone(), page)
+	};
 
 	let html = helper::get_html(url)?;
 
@@ -61,7 +64,7 @@ fn get_manga_list(filters: Vec<Filter>, page: i32) -> Result<MangaPageResult> {
 		helper::check_in()
 	}
 
-	let has_more = query.is_empty();
+	let has_more = true;
 
 	let mut mangas: Vec<Manga> = Vec::new();
 
