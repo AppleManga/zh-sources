@@ -153,10 +153,8 @@ fn get_manga_details(id: String) -> Result<Manga> {
 		.attr("src")
 		.read();
 	let viewer = if toon_icon.contains("vtoon_icon") {
-		println!("Scroll");
 		MangaViewer::Scroll
 	} else {
-		println!("Rtl");
 		MangaViewer::Rtl
 	};
 
@@ -192,20 +190,22 @@ fn get_chapter_list(manga_id: String) -> Result<Vec<Chapter>> {
 		if id.is_empty() {
 			continue
 		}
-		let title = item.select(".title").text().read().trim().to_string();
-		let mut scanlator = item.select("span:nth-child(2)").text().read().trim().to_string().replace("￥", "").replace("&nbsp;", "");
-		if scanlator == "会员专享" {
-			scanlator = "登录免费".to_string();
+		let mut price = item.select("span:nth-child(2)").text().read().trim().to_string().replace("￥", "").replace("&nbsp;", "");
+		if price == "会员专享" {
+			price = "  登录免费".to_string();
+		} else if price == "0" {
+			price = String::new();
 		} else {
-			scanlator = format!("￥ {}", scanlator );
+			price = format!("  ¥{}", price );
 		}
+		let mut title = item.select(".title").text().read().trim().to_string();
+		title = format!("{}{}", title, price );
 		let chapter = (index + 1) as f32;
 		let url = helper::gen_chapter_url(id.clone());
 		chapters.push(Chapter {
 			id,
 			title,
 			chapter,
-			scanlator,
 			url,
 			..Default::default()
 		});
