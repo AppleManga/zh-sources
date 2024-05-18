@@ -10,7 +10,7 @@ const FILTER_TYPES: [&str; 4] = ["boy", "girl", "r18", "picture"];
 const FILTER_ORIGIN: [&str; 5] = ["0", "2", "3", "1", "4"];
 const FILTER_FINISHED: [&str; 3] = ["0", "1", "2"];
 const FILTER_FREE: [&str; 3] = ["0", "1", "2"];
-const FILTER_SORT: [&str; 2] = ["1", "2"];
+const FILTER_SORT: [&str; 2] = ["2", "1"];
 
 #[get_manga_list]
 fn get_manga_list(filters: Vec<Filter>, page: i32) -> Result<MangaPageResult> {
