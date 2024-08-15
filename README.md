@@ -14,6 +14,7 @@ This repository hosts the public sources that are installable directly through t
 - [x] 看漫画 `https://www.kanman.com`
 - [x] 酷看漫画 `https://www.kukanmanhua.com`
 - [x] 喜漫漫画 `https://www.favcomic.com` ( 支持账号登录 )
+- [x] 歪瑞古德漫画 `https://www.veryim.com`
 
 ## To-Do List
 
