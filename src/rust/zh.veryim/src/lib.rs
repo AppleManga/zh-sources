@@ -4,6 +4,7 @@ extern crate alloc;
 use aidoku::{
 	error::Result,
 	helpers::uri::encode_uri,
+	helpers::uri::encode_uri_component,
 	helpers::{substring::Substring},
 	prelude::*,
 	std::{
@@ -187,7 +188,9 @@ fn get_page_list(manga_id: String, chapter_id: String) -> Result<Vec<Page>> {
 	let image_list: Vec<&str> = image_list_str.split("$qingtiandy$").collect();
 	for (index, image) in image_list.iter().enumerate() {
 		let index = index as i32;
-		let url = image.to_string();
+		let original_url = image.to_string();
+		let url = format!("https://c3.digi163.com/statics/pic/?p={}&picid={}&m_httpurl=&fenye=0", encode_uri_component(original_url.clone()), manga_id.clone());
+		// println!("{}", url);
 		pages.push(Page {
 			index,
 			url,
