@@ -148,7 +148,7 @@ fn get_chapter_list(manga_id: String) -> Result<Vec<Chapter>> {
 			.collect::<Vec<String>>()
 			.pop()
 			.unwrap();
-		let title = item.select("a").attr("title").read();
+		let title = item.select("a").text().read();
 		let chapter = (index + 1) as f32;
 		let url = format!("{}/manhua/{}/{}.html", BASE_URL, manga_id, id);
 		chapters.push(Chapter {
