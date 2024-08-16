@@ -1,8 +1,8 @@
-# Aidoku Sources
-This repository hosts the public sources that are installable directly through the Aidoku application.
+# Caret Sources
+This repository hosts the public sources that are installable directly through the Caret application.
 
 ## Usage
-[Add this source list](https://aidoku.app/add-source-list/?url=https://raw.githubusercontent.com/WhisperKit/zh-sources/gh-pages/) to the Aidoku app.
+[Add this source list](https://caret.uvov.com/add-source-list/?url=https://raw.githubusercontent.com/WhisperKit/zh-sources/gh-pages/) to the Caret app.
 
 ## Source List
 
@@ -15,6 +15,7 @@ This repository hosts the public sources that are installable directly through t
 - [x] 酷看漫画 `https://www.kukanmanhua.com`
 - [x] 喜漫漫画 `https://www.favcomic.com` ( 支持账号登录 )
 - [x] 歪瑞古德漫画 `https://www.veryim.com`
+- [x] 18漫畫 `https://18mh.org`
 
 ## To-Do List
 
