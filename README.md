@@ -2,7 +2,7 @@
 This repository hosts the public sources that are installable directly through the Caret application.
 
 ## Usage
-[Add this source list](https://caret.uvov.com/add-source-list/?url=https://raw.githubusercontent.com/WhisperKit/zh-sources/gh-pages/) to the Caret app.
+[Add this source list](https://caret.uvov.com/add-source-list/?url=https://raw.githubusercontent.com/AppleManga/zh-sources/gh-pages/) to the Caret app.
 
 ## Source List
 

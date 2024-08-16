@@ -201,7 +201,15 @@ fn get_page_list(manga_id: String, chapter_id: String) -> Result<Vec<Page>> {
 			Err(_) => continue,
 		};
 		let index = index as i32;
-		let url = item.attr("src").read().trim().to_string();
+		let url = {
+			let src = item.attr("src").read().trim().to_string();
+			if src.starts_with("http") {
+				src
+			} else {
+				item.attr("data-src").read().trim().to_string()
+			}
+		};
+
 		pages.push(Page {
 			index,
 			url,
