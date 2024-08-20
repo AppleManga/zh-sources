@@ -16,6 +16,7 @@ This repository hosts the public sources that are installable directly through t
 - [x] 喜漫漫画 `https://www.favcomic.com` ( 支持账号登录 )
 - [x] 歪瑞古德漫画 `https://www.veryim.com`
 - [x] 18漫畫 `https://18mh.org`
+- [x] 皮皮漫画 `https://www.pipimanhua.com`
 
 ## To-Do List
 
