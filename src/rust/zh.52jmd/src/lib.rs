@@ -6,6 +6,7 @@ use aidoku::{
 	helpers::uri::encode_uri,
 	prelude::*,
 	std::{
+		defaults::defaults_get,
 		net::{HttpMethod, Request},
 		String, Vec,
 	},
@@ -13,7 +14,9 @@ use aidoku::{
 };
 use alloc::string::ToString;
 
-const BASE_URL: &str = "https://52jmd.com";
+fn get_url() -> String {
+	defaults_get("url").unwrap().as_string().unwrap().read()
+}
 const USER_AGENT: &str = "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1";
 
 const FILTER_CATALOG: [&str; 6] = ["all", "韩漫", "日漫", "3D漫画", "真人", "短篇"];
@@ -54,14 +57,14 @@ fn get_manga_list(filters: Vec<Filter>, page: i32) -> Result<MangaPageResult> {
 	let url = if query.is_empty() {
 		format!(
 			"{}/catalog/{}/ob/{}/st/{}/page/{}",
-			BASE_URL,
+			get_url(),
 			encode_uri(catalog),
 			order,
 			end,
 			page
 		)
 	} else {
-		format!("{}/cata.php?key={}", BASE_URL, encode_uri(query.clone()))
+		format!("{}/cata.php?key={}", get_url(), encode_uri(query.clone()))
 	};
 
 	let html = Request::new(url, HttpMethod::Get).header("User-Agent", USER_AGENT).html()?;
@@ -95,7 +98,7 @@ fn get_manga_list(filters: Vec<Filter>, page: i32) -> Result<MangaPageResult> {
 
 #[get_manga_details]
 fn get_manga_details(id: String) -> Result<Manga> {
-	let url = format!("{}/manga/{}", BASE_URL, id.clone());
+	let url = format!("{}/manga/{}", get_url(), id.clone());
 	let html = Request::new(url.clone(), HttpMethod::Get).header("User-Agent", USER_AGENT).html()?;
 	let cover = html
 		.select(".mobile-play>.module-item-cover>.module-item-pic>img")
@@ -169,7 +172,7 @@ fn get_manga_details(id: String) -> Result<Manga> {
 
 #[get_chapter_list]
 fn get_chapter_list(manga_id: String) -> Result<Vec<Chapter>> {
-	let url = format!("{}/manga/{}", BASE_URL, manga_id.clone());
+	let url = format!("{}/manga/{}", get_url(), manga_id.clone());
 	let html = Request::new(url.clone(), HttpMethod::Get).header("User-Agent", USER_AGENT).html()?;
 	let mut chapters: Vec<Chapter> = Vec::new();
 
@@ -188,7 +191,7 @@ fn get_chapter_list(manga_id: String) -> Result<Vec<Chapter>> {
 			.unwrap();
 		let title = item.select("span").text().read().trim().to_string();
 		let chapter = (index + 1) as f32;
-		let url = format!("{}/manga/{}/{}", BASE_URL, manga_id, id);
+		let url = format!("{}/manga/{}/{}", get_url(), manga_id, id);
 		chapters.push(Chapter {
 			id,
 			title,
@@ -203,7 +206,7 @@ fn get_chapter_list(manga_id: String) -> Result<Vec<Chapter>> {
 
 #[get_page_list]
 fn get_page_list(manga_id: String, chapter_id: String) -> Result<Vec<Page>> {
-	let url = format!("{}/manga/{}/{}", BASE_URL, manga_id.clone(), chapter_id.clone());
+	let url = format!("{}/manga/{}/{}", get_url(), manga_id.clone(), chapter_id.clone());
 	let html = Request::new(url.clone(), HttpMethod::Get).header("User-Agent", USER_AGENT).html()?;
 	let mut pages: Vec<Page> = Vec::new();
 

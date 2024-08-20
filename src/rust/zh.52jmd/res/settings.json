@@ -1,0 +1,15 @@
+[
+	{
+		"type": "group",
+		"title": "设置网址",
+		"footer": "如果无法访问，请通过 jli617616@gmail.com 获取最新网址后设置在这里",
+		"items": [
+			{
+				"type": "text",
+				"key": "url",
+				"placeholder": "URL",
+				"default": "https://jmd52.com"
+			}
+		]
+	}
+]
