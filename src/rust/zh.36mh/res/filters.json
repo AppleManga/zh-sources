@@ -11,6 +11,11 @@
 		"type": "select",
 		"name": "排序",
 		"options": ["人气", "时间"]
+	},
+	{
+		"type": "select",
+		"name": "进度",
+		"options": ["全部", "连载", "完结"]
 	}
   ]
   

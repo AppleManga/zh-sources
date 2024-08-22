@@ -13,18 +13,20 @@ use aidoku::{
 };
 use alloc::string::ToString;
 
-const BASE_URL: &str = "https://www.qimiaomanhua.com";
+const BASE_URL: &str = "https://www.36mh.org";
 const USER_AGENT: &str = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36";
 
 const FILTER_LIST: [&str; 5] = ["0", "1", "2", "3", "4"];
 const FILTER_ORDER: [&str; 2] = ["hits", "addtime"];
 
+const FILTER_FINISH: [&str; 3] = ["0", "1", "2"];
 
 #[get_manga_list]
 fn get_manga_list(filters: Vec<Filter>, page: i32) -> Result<MangaPageResult> {
 	let mut query = String::new();
 	let mut list = String::new();
 	let mut order = String::new();
+	let mut finish = String::new();
 
 	for filter in filters {
 		match filter.kind {
@@ -40,6 +42,9 @@ fn get_manga_list(filters: Vec<Filter>, page: i32) -> Result<MangaPageResult> {
 					"排序" => {
 						order = FILTER_ORDER[index].to_string();
 					}
+					"进度" => {
+						finish = FILTER_FINISH[index].to_string();
+					}
 					_ => continue,
 				}
 			}
@@ -49,10 +54,11 @@ fn get_manga_list(filters: Vec<Filter>, page: i32) -> Result<MangaPageResult> {
 
 	let url = if query.is_empty() {
 		format!(
-			"{}/category/order/{}/list/{}/page/{}",
+			"{}/category/order/{}/list/{}/finish/{}/page/{}",
 			BASE_URL,
 			order,
 			list,
+			finish,
 			page
 		)
 	} else {
@@ -63,17 +69,17 @@ fn get_manga_list(filters: Vec<Filter>, page: i32) -> Result<MangaPageResult> {
 	let has_more = query.is_empty();
 	let mut mangas: Vec<Manga> = Vec::new();
 
-	for item in html.select(".common-comic-item").array() {
+	for item in html.select(".searchResult > .list > .item").array() {
 		let item = match item.as_node() {
 			Ok(node) => node,
 			Err(_) => continue,
 		};
 		let id = item
-			.select(".cover")
+			.select(".img > a")
 			.attr("href")
 			.read().replace("/manhua/", "");
-		let cover = item.select(".lazy").attr("data-original").read().trim().replace(" ", "");
-		let title = item.select(".lazy").attr("alt").read();
+		let cover = item.select(".img > a > img").attr("src").read();
+		let title = item.select(".img > a > img").attr("alt").read();
 		mangas.push(Manga {
 			id,
 			cover,
@@ -93,36 +99,44 @@ fn get_manga_details(id: String) -> Result<Manga> {
 	let url = format!("{}/manhua/{}", BASE_URL, id.clone());
 	let html = Request::new(url.clone(), HttpMethod::Get).header("User-Agent", USER_AGENT).html()?;
 	let cover = html
-		.select(".de-info__cover>img")
+		.select(".comicInfo > .ib.cover > .img > img")
 		.attr("src")
-		.read().trim().replace(" ", "");
+		.read();
 	let title = html
-		.select(".comic-title.j-comic-title")
-		.text().read().trim().to_string();
+		.select(".comicInfo > .ib.cover > .img > img")
+		.attr("title")
+		.read();
 	let author = html
-		.select(".comic-author > .name > a")
+		.select(".comicInfo > div.ib.info > p:nth-child(2) > span")
 		.text()
 		.read()
-		.trim()
-		.split(" ")
-		.map(|a| a.to_string())
-		.collect::<Vec<String>>()
-		.join(", ");
+		.replace("作  者：", "");
 	let artist = String::new();
 	// aidoku::prelude::println!("artist: {}", artist);
 	let description = html
-		.select(".intro-total")
+		.select(".ib.info > p.content")
 		.text()
 		.read()
-		.trim()
-		.to_string();
+		.replace("介绍:", "");
 	let categories = html
-		.select(".comic-status > span:nth-child(1) > b > a")
+		.select(".ib.info > p.gray > span.ib.l > a")
 		.array()
 		.map(|a| a.as_node().unwrap().text().read().trim().to_string())
 		.filter(|a| !a.is_empty())
 		.collect::<Vec<String>>();
-	let status = MangaStatus::Unknown;
+	let status = {
+		let status_text = html.select(".ib.info > p.gray > span:nth-child(3)")
+			.text()
+			.read()
+			.replace("状 态：", "");
+		if status_text.contains("完结") {
+			MangaStatus::Completed
+		} else if status_text.contains("连载") {
+			MangaStatus::Ongoing
+		} else {
+			MangaStatus::Unknown
+		}
+	};
 	let nsfw = MangaContentRating::Safe;
 	let viewer = MangaViewer::Scroll;
 
@@ -147,7 +161,7 @@ fn get_chapter_list(manga_id: String) -> Result<Vec<Chapter>> {
 	let html = Request::new(url.clone(), HttpMethod::Get).header("User-Agent", USER_AGENT).html()?;
 	let mut chapters: Vec<Chapter> = Vec::new();
 
-	for (index, item) in html.select(".j-chapter-item.chapter__item>a").array().enumerate() {
+	for (index, item) in html.select("#chapterlistload > .list > a").array().enumerate() {
 		let item = match item.as_node() {
 			Ok(item) => item,
 			Err(_) => continue,
