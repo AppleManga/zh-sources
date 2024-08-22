@@ -6,7 +6,7 @@ This repository hosts the public sources that are installable directly through t
 
 ## Source List
 
-- [x] 36漫画 `https://www.qimiaomanhua.com`
+- [x] ~~36漫画 `https://www.qimiaomanhua.com`~~
 - [x] 禁漫岛 `https://52jmd.com`
 - [x] ~~漫画吧 `https://www.gmh8.com`~~
 - [x] ~~cc漫画网 `https://www.qiruiyaoye.cn`~~
