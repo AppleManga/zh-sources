@@ -17,6 +17,7 @@ This repository hosts the public sources that are installable directly through t
 - [x] 歪瑞古德漫画 `https://www.veryim.com`
 - [x] 18漫畫 `https://18mh.org`
 - [x] 皮皮漫画 `https://www.pipimanhua.com`
+- [x] GoDa漫畫 `https://godamh.com` ( [suiyuran 的 zh.godamanga v6 修改而来](https://github.com/suiyuran/aidoku-zh-sources/tree/main/src/rust/zh.godamanga) )
 
 ## To-Do List
 
