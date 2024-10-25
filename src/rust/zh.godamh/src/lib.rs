@@ -14,8 +14,7 @@ use aidoku::{
 use alloc::string::ToString;
 
 const WWW_URL: &str = "https://godamh.com";
-const NEWS_URL: &str = "https://news.cocolamanhua.com";
-const API_URL: &str = "https://api-get.mgsearcher.com";
+const API_URL: &str = "https://api-get-v2.mgsearcher.com";
 
 const FILTER_CATEGORY: [&str; 35] = [
 	"",
@@ -318,7 +317,7 @@ fn get_chapter_list(id: String) -> Result<Vec<Chapter>> {
 fn get_page_list(manga_id: String, chapter_id: String) -> Result<Vec<Page>> {
 	let ids = manga_id.split("/").collect::<Vec<&str>>();
 	let url = format!(
-		"{}/chapter/getinfo?m={}&c={}",
+		"{}/api/chapter/getinfo?m={}&c={}",
 		API_URL,
 		ids[1],
 		chapter_id.clone()
@@ -361,5 +360,5 @@ fn get_page_list(manga_id: String, chapter_id: String) -> Result<Vec<Page>> {
 
 #[modify_image_request]
 fn modify_image_request(request: Request) {
-	request.header("Referer", &NEWS_URL);
+	request.header("Referer", &WWW_URL);
 }
